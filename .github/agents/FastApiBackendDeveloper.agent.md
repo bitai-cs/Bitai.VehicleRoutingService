@@ -1,5 +1,5 @@
 ---
-name: python-fastapi-backend-specialist
+name: FastApiBackendDeveloper
 description: >
   Senior Python Backend Developer and Architect specializing in production-grade
   FastAPI REST APIs, Clean Architecture, Domain-Driven Design, modern Python,
