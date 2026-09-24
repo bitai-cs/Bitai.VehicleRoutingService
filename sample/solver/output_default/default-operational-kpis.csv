@@ -1,0 +1,32 @@
+section,metric,value,target,interpretation
+coverage_and_service,service_level_pct,100.00%,>= 95%,Share of employees served relative to total demand. This is the primary service coverage metric.
+coverage_and_service,weighted_service_level_pct,100.00%,>= 97%,Priority-weighted service coverage. It reflects whether the most critical demand is being served.
+coverage_and_service,employees_served,50,as high as possible,Count of employees successfully covered by the solved routes.
+coverage_and_service,employees_omitted,0,0 preferred,Count of employees left unserved. This should be minimized in a feasible plan.
+efficiency,avg_distance_per_served_employee_km,10.986,<= 20 km preferred,Average physical distance per served employee. Lower values indicate tighter geographic efficiency.
+efficiency,avg_time_per_served_employee_min,11.86,<= 20 min preferred,Average modeled time per served employee. Useful for comparing effort per worker served.
+efficiency,productive_time_share_pct,100.00%,>= 80% preferred,"Share of modeled route time spent in productive activity (drive + service), versus waiting or slack."
+efficiency,total_uncosted_distance_km,262.638,as low as possible,Distance outside the objective cost logic. This helps reveal travel that is not fully captured by the scoring model.
+load_balance_and_fleet,fleet_vehicles_total,12,scenario-defined,Total vehicles available for the current scenario.
+load_balance_and_fleet,fleet_vehicles_used,11,as needed,Number of routes that are actually active in the solution.
+load_balance_and_fleet,fleet_utilization_pct,91.67%,60%-90% preferred,Share of the available fleet that is actively used. Good utilization reduces idle capacity without overstretching the fleet.
+load_balance_and_fleet,avg_demand_utilization_pct,90.91%,60%-85% preferred,Average demand utilization across routes. Values near saturation indicate heavy consolidation but increased risk of tight routing.
+load_balance_and_fleet,p95_demand_utilization_pct,100.00%,<= 100% preferred,P95 demand utilization across routes. This identifies the most stressed routes in the plan.
+load_balance_and_fleet,duration_balance_cv,0.321822,<= 0.50 preferred,Coefficient of variation for route durations. Lower values indicate more balanced route load across vehicles.
+load_balance_and_fleet,service_stops_balance_cv,0.195959,<= 0.50 preferred,Coefficient of variation for serviced stops per route. Lower values indicate more uniform stop distribution.
+load_balance_and_fleet,workload_balance_demand_std,0.890724,as low as possible,"Population standard deviation of covered demand across active routes. In plain terms, it shows how evenly employee load is distributed among vehicles: lower values mean routes carry similar demand, which is usually preferred because it reduces overload risk on specific vehicles and improves operational fairness. Higher values indicate that a few routes are carrying much more demand than others, which can increase service fragility and make day-to-day operations less predictable. Example: a value near 0.89 is better than 1.50 or 2.00 because demand is less dispersed, so assignment pressure is more uniform across vehicles."
+load_balance_and_fleet,workload_balance_distance_std,17.332993,as low as possible,"Population standard deviation of physical route distance across active routes. In practical terms, it measures how different route lengths are from one vehicle to another: lower values are typically recommended because they imply a more even split of travel effort, fuel consumption, and driver fatigue. Higher values suggest that some vehicles are traveling significantly farther than others, which can raise operating costs and create uneven workload pressure. Example: if this KPI is 17.33 km, it is better than 25 km because the distance spread between routes is smaller, so the fleet operates with lower imbalance and less extreme long-route burden."
+load_balance_and_fleet,workload_balance_duration_std,17.349113,as low as possible,"Population standard deviation of modeled route duration across active routes. Put simply, it indicates how balanced route times are across the fleet: lower values are generally better because they mean drivers finish in similar time windows, simplifying supervision, shift planning, and SLA compliance. Higher values mean some routes take much longer than others, which can lead to overtime, harder dispatch coordination, and lower perceived service consistency. Example: a duration std of 17.35 min is better than 25 min because completion times are less spread out, reducing overtime risk and improving shift synchronization."
+load_balance_and_fleet,max_route_duration_min,85.00,as low as possible,Maximum modeled route duration among active routes.
+load_balance_and_fleet,min_route_duration_min,22.00,as high as possible,Minimum modeled route duration among active routes.
+load_balance_and_fleet,spread_route_duration_min,63.00,as low as possible,Difference between the longest and shortest active-route durations.
+load_balance_and_fleet,max_min_duration_ratio,3.863636,close to 1.0 preferred,Max/min duration ratio across routes. A high value means uneven routing effort among vehicles.
+risk_and_exceptions,average_stop_wait_min,0.000,<= 5 min preferred,Average waiting time at stops. Higher values indicate operational friction or schedule slack.
+risk_and_exceptions,p95_stop_wait_min,0.000,<= 15 min preferred,95th percentile of waiting time at service stops to highlight peak-delay risk.
+sustainability,co2_kg_per_km,0.192000,scenario-defined,CO2 factor used for estimation (kg per km).
+sustainability,estimated_co2_kg,109.800,as low as possible,Estimated total CO2 emissions.
+objective_diagnostics,objective_travel_cost,286678,contextual,Objective contribution from travel arcs.
+objective_diagnostics,objective_omission_penalty,0,contextual,Objective contribution from omitted employees.
+objective_diagnostics,objective_unattributed_cost,593,close to 0 preferred,Objective remainder not explained by travel and omission terms.
+objective_diagnostics,solver_branches,5345,contextual,Branching decisions explored by the solver.
+objective_diagnostics,solver_failures,1835,contextual,Backtracks/failures reported during search.

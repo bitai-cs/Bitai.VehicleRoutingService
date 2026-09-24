@@ -1,0 +1,12 @@
+[project]
+name = "vehicle-routing-solution"
+version = "0.1.0"
+description = "Bitai Vehicle Routing solution workspace (FastAPI web API + Django web app)"
+requires-python = ">=3.14"
+dependencies = []
+
+[tool.uv.workspace]
+members = ["apps/*"]
+
+[tool.uv]
+package = false

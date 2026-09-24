@@ -1,0 +1,17 @@
+[project]
+name = "vehicle-routing-web"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Viko Bastidas", email = "vico.bastidas@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = []
+
+[project.scripts]
+vehicle-routing-web = "vehicle_routing_web:main"
+
+[build-system]
+requires = ["uv_build>=0.12.17,<0.13.0"]
+build-backend = "uv_build"
