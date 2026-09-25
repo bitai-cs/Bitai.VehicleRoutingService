@@ -92,6 +92,19 @@ class ProcessRepository:
         except (OSError, ValidationError) as exc:
             raise StorageCorruptedError("Stored solver result is unreadable.") from exc
 
+    def result_version(self, process_id: str) -> tuple[int, int] | None:
+        """``(result mtime_ns, payload mtime_ns)`` when solved, else ``None``. Cheap cache key."""
+        folder = self._existing_dir(process_id)
+        if self._status_of(folder) is not ProcessStatus.SOLVED:
+            return None
+        try:
+            return (
+                (folder / RESULT_FILENAME).stat().st_mtime_ns,
+                (folder / payload_filename(process_id)).stat().st_mtime_ns,
+            )
+        except OSError:
+            return None
+
     def read_error(self, process_id: str) -> dict[str, Any] | None:
         """The error record, or ``None`` unless the status is failed."""
         folder = self._existing_dir(process_id)

@@ -60,7 +60,8 @@ def layout() -> dbc.Container:
                 getRowId="params.data.process_id",
                 dashGridOptions=GRID_OPTIONS,
                 defaultColDef={"sortable": True, "resizable": True},
-                dangerously_allow_code=False,
+                # Constant strings only (getRowId, cellClassRules); row text is data, never code.
+                dangerously_allow_code=True,
                 style={"height": "480px"},
             ),
             dcc.Interval(id="batch-interval", interval=REFRESH_INTERVAL_MS),

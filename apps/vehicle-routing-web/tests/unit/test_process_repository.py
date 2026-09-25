@@ -95,7 +95,7 @@ def test_success_writes_result_then_releases_marker(repository, storage, add_pro
     assert repository.get_status("alpha") is ProcessStatus.SOLVED
     result = repository.read_result("alpha")
     assert result is not None
-    assert result.service_level_pct == 100.0
+    assert result.service_level_pct == pytest.approx(5 / 6 * 100)
 
 
 def test_crash_after_result_before_marker_release_reads_as_running(

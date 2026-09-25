@@ -63,3 +63,5 @@ coverage.xml
 
 # vehicle-routing-web runtime data
 apps/vehicle-routing-web/storage/
+/storage/hashes.txt
+/storage/payloads

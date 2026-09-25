@@ -1,7 +1,9 @@
 import base64
+import json
 
 import pytest
 
+from tests.factories import make_payload_dict
 from vehicle_routing_web.application.batch_service import BatchSubmission
 from vehicle_routing_web.application.upload_service import UploadService
 from vehicle_routing_web.domain.artifacts import PENDING_FILENAME, RESULT_FILENAME
@@ -113,7 +115,7 @@ def test_describe_submission_colors():
 def test_dashboard_reads_the_result_file_constant(dashboard, solve_response):
     from vehicle_routing_web.presentation.container import get_repository, get_storage, get_upload_service
 
-    get_upload_service().upload("run1", b'{"a": 1}')
+    get_upload_service().upload("run1", json.dumps(make_payload_dict()).encode())
     assert "not been solved" in str(dashboard.layout(process_id="run1"))
 
     get_repository().begin_processing("run1")
@@ -122,8 +124,8 @@ def test_dashboard_reads_the_result_file_constant(dashboard, solve_response):
     get_repository().complete_success("run1", solve_response)
     assert (get_storage().process_dir("run1") / RESULT_FILENAME).is_file()
     page = str(dashboard.layout(process_id="run1"))
-    assert "OPTIMAL" in page
-    assert "100.0 %" in page
+    assert "FEASIBLE" in page
+    assert "83.3 %" in page
 
 
 def test_dashboard_failed_invalid_and_missing(dashboard):

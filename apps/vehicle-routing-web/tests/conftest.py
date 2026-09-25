@@ -3,66 +3,14 @@ from pathlib import Path
 
 import pytest
 
+from tests.factories import make_response_dict
 from vehicle_routing_web.application.upload_service import UploadService
 from vehicle_routing_web.data.process_repository import ProcessRepository
 from vehicle_routing_web.data.storage import FileStorage
 from vehicle_routing_web.infrastructure.settings import get_settings
 from vehicle_routing_web.presentation import container
 
-_STOP = {
-    "stop_sequence": 0,
-    "stop_type": "START",
-    "node_id": 0,
-    "node_label": "Depot",
-    "arrival_minutes": 480,
-    "arrival_time": "08:00",
-    "departure_minutes": 480,
-    "departure_time": "08:00",
-    "service_minutes": 0,
-    "wait_minutes": 0,
-    "cumulative_wait_minutes": 0,
-    "leg_distance_km_from_prev": 0.0,
-    "leg_travel_minutes_from_prev": 0,
-    "cumulative_distance_km": 0.0,
-    "load_before": 0,
-    "load_delta": 0,
-    "load_after": 0,
-}
-
-_ROUTE = {
-    "vehicle_id": 0,
-    "start_node_label": "Depot",
-    "end_node_label": "Depot",
-    "covered_demand": 2,
-    "maximum_demand_coverage": 10,
-    "demand_utilization_pct": 20.0,
-    "departure_time": "08:00",
-    "arrival_time": "09:00",
-    "remaining_time_to_limit_min": 420,
-    "modeled_route_duration": 60,
-    "modeled_route_distance": 3.0,
-    "physical_route_distance": 3.0,
-    "total_service_stops": 2,
-    "is_empty_route": False,
-    "total_drive_time_min": 50,
-    "total_wait_time_min": 0,
-    "total_service_time_min": 10,
-    "stops": [_STOP],
-    "some_future_field": "tolerated",
-}
-
-SOLVE_RESPONSE = {
-    "status": "OPTIMAL",
-    "omitted_service_points": [],
-    "solved_routes": [_ROUTE],
-    "total_covered_service_points": 2,
-    "total_modeled_route_distance": 3.0,
-    "total_physical_route_distance": 3.0,
-    "total_objective_value": 3000,
-    "search_wall_time_ms": 12,
-    "total_service_points": 2,
-    "service_level_pct": 100.0,
-}
+SOLVE_RESPONSE = make_response_dict()
 
 PAYLOAD = b'{"nodes": {}, "vehicle_capacities": [10]}'
 
@@ -106,11 +54,18 @@ def isolated_container(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         container.get_storage,
         container.get_repository,
         container.get_upload_service,
+        container.get_solution_service,
         container.get_batch_runner,
     ):
         cached.cache_clear()
     yield storage_dir
     runner_cache = container.get_batch_runner
     runner_cache.cache_clear()
-    for cached in (get_settings, container.get_storage, container.get_repository, container.get_upload_service):
+    for cached in (
+        get_settings,
+        container.get_storage,
+        container.get_repository,
+        container.get_upload_service,
+        container.get_solution_service,
+    ):
         cached.cache_clear()

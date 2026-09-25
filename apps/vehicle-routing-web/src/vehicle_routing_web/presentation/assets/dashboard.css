@@ -1,0 +1,15 @@
+/* Row highlight classes used by the AG Grid rowClassRules in visualization/tables.py.
+   Every highlighted state is also present as text in a column, so colour is never the only cue.
+   Colours are light tints; text keeps the default dark colour (contrast >= 4.5:1). */
+.row-priority-high { background-color: #fbd5d1 !important; }
+.row-priority-medium { background-color: #fdf1c4 !important; }
+.row-util-low { background-color: #d9f2e3 !important; }
+.row-util-mid { background-color: #fdf1c4 !important; }
+.row-util-high { background-color: #fbd5d1 !important; }
+.row-edge { background-color: #e5e8ea !important; }
+.row-wait-some { background-color: #fdf1c4 !important; }
+.row-wait-high { background-color: #fbd5d1 !important; }
+.row-rating-good { background-color: #d9f2e3 !important; }
+.row-rating-warning { background-color: #fdf1c4 !important; }
+.row-rating-bad { background-color: #fbd5d1 !important; }
+.row-rating-info { background-color: #eef0f2 !important; }

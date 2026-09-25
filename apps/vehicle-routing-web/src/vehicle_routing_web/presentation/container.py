@@ -9,6 +9,7 @@ from __future__ import annotations
 from functools import lru_cache
 
 from vehicle_routing_web.application.batch_service import BatchRunner
+from vehicle_routing_web.application.solution_service import SolutionService
 from vehicle_routing_web.application.upload_service import UploadService
 from vehicle_routing_web.data.process_repository import ProcessRepository
 from vehicle_routing_web.data.storage import FileStorage
@@ -24,6 +25,11 @@ def get_storage() -> FileStorage:
 @lru_cache
 def get_repository() -> ProcessRepository:
     return ProcessRepository(get_storage())
+
+
+@lru_cache
+def get_solution_service() -> SolutionService:
+    return SolutionService(get_repository())
 
 
 @lru_cache
