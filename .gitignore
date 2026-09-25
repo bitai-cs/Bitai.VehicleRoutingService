@@ -60,3 +60,6 @@ coverage.xml
 .DS_Store
 *.csv#
 /.vs
+
+# vehicle-routing-web runtime data
+apps/vehicle-routing-web/storage/
