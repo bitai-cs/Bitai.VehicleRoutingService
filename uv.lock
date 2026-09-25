@@ -976,6 +976,7 @@ dependencies = [
     { name = "dash" },
     { name = "dash-ag-grid" },
     { name = "dash-bootstrap-components" },
+    { name = "httpx" },
     { name = "pydantic-settings" },
 ]
 
@@ -990,6 +991,7 @@ requires-dist = [
     { name = "dash", specifier = ">=4.4.1" },
     { name = "dash-ag-grid", specifier = ">=35.3.0" },
     { name = "dash-bootstrap-components", specifier = ">=2.0.4" },
+    { name = "httpx", specifier = ">=0.28.1" },
     { name = "pydantic-settings", specifier = ">=2.15.0" },
 ]
 

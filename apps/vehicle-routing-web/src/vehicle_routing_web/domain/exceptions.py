@@ -39,5 +39,23 @@ class DuplicateProcessIdError(UploadError):
         self.process_id = process_id
 
 
+class ProcessNotFoundError(Exception):
+    """No process folder/payload exists for the given id."""
+
+
+class SolveApiError(Exception):
+    """A failed call to the solver API, already mapped to user-safe fields.
+
+    ``message`` never contains stack traces, URLs with credentials or raw
+    response bodies.
+    """
+
+    def __init__(self, error_type: str, message: str, http_status: int | None = None) -> None:
+        super().__init__(message)
+        self.error_type = error_type
+        self.message = message
+        self.http_status = http_status
+
+
 class StorageCorruptedError(Exception):
     """The on-disk registry is unreadable. Operational error, not a user mistake."""

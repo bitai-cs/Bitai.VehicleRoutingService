@@ -1,0 +1,1 @@
+This folder stores process folders.

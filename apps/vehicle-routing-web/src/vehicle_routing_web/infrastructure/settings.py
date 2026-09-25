@@ -29,6 +29,9 @@ class AppSettings(BaseSettings):
     storage_dir: Path = Path("./storage")
     max_upload_bytes: int = Field(default=50 * 1024 * 1024, gt=0)
 
+    # Upper bound on simultaneous solve calls made by this server process.
+    max_concurrent_solves: int = Field(default=4, ge=1, le=32)
+
 
 @lru_cache
 def get_settings() -> AppSettings:
