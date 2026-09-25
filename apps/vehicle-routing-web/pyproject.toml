@@ -1,13 +1,19 @@
 [project]
 name = "vehicle-routing-web"
 version = "0.1.0"
-description = "Add your description here"
+description = "Vehicle Routing Dash web app: payload upload, batch solve, result dashboard"
 readme = "README.md"
 authors = [
     { name = "Viko Bastidas", email = "vico.bastidas@gmail.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "dash>=4.4.1",
+    "dash-ag-grid>=35.3.0",
+    "dash-bootstrap-components>=2.0.4",
+    "httpx>=0.28.1",
+    "pydantic-settings>=2.15.0",
+]
 
 [project.scripts]
 vehicle-routing-web = "vehicle_routing_web:main"
@@ -15,3 +21,23 @@ vehicle-routing-web = "vehicle_routing_web:main"
 [build-system]
 requires = ["uv_build>=0.12.17,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.9",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py314"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "S", "PT", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]
